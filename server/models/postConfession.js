@@ -3,6 +3,10 @@ import mongoose from 'mongoose'
 const postSchema = mongoose.Schema({
   title: String,
   message: String,
+  confess: String,
+  comment: {
+    type: String,
+  },
   likeCont: {
     type: Number,
     default: 0,
