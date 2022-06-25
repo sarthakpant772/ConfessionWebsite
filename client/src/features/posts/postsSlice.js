@@ -32,14 +32,21 @@ const postsSlice = createSlice({
       reducer(state, action) {
         state.posts.push(action.payload)
       },
-      prepare(title, confess) {
+      prepare(title, confess, comment) {
         return {
           payload: {
-            id: nanoid(),
+            id: nanoid().toISOString(),
             title,
             confess,
+            comment: {
+              body: '',
+              data: new Date().toISOString(),
+            },
             createdAt: new Date().toISOString(),
-            likeCount: 0,
+            reaction: {
+              likeCount: 0,
+              report: 0,
+            },
           },
         }
       },
@@ -78,6 +85,9 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts.posts
 export const getPostsStatus = (state) => state.posts.status
 export const getPostsError = (state) => state.posts.error
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find((post) => post.id === postId)
+
 export const { postAdded } = postsSlice.actions
 
 export default postsSlice.reducer
