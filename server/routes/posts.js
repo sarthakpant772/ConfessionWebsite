@@ -3,7 +3,7 @@ import { createPost, getPosts } from '../controllers/posts.js';
 
 const router =express.Router();
 
-router.get('/',createPost);
+router.post('/',createPost);
 router.get('/',getPosts);
 
 

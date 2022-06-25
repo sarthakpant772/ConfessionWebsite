@@ -1,12 +1,16 @@
 import mongoose from 'mongoose'
 
 const postSchema = mongoose.Schema({
-  title: String,
-  message: String,
-  confess: String,
-  comment: {
+  id: String,
+  title: {
     type: String,
+    default: 'this is title',
   },
+  confess: {
+    type: String,
+    default: 'this is confess',
+  },
+  comment: [],
   likeCont: {
     type: Number,
     default: 0,
