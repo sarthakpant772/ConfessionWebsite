@@ -10,10 +10,10 @@ const postSchema = mongoose.Schema({
     type: String,
     default: 'this is confess',
   },
-  comment: [{body:String,date:Date}],
-  reactions:{
-    likeCount:Number,
-    report:Number,
+  comment: [{ body: String, date: Date }],
+  likeCount: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,

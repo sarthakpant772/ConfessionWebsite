@@ -35,7 +35,6 @@ const postsSlice = createSlice({
       prepare(title, confess, comment) {
         return {
           payload: {
-            id: nanoid().toISOString(),
             title,
             confess,
             comment: {
@@ -43,13 +42,18 @@ const postsSlice = createSlice({
               data: new Date().toISOString(),
             },
             createdAt: new Date().toISOString(),
-            reaction: {
-              likeCount: 0,
-              report: 0,
-            },
+            likeCount: 0,
           },
         }
       },
+    },
+    reactionAdded(state, action) {
+      const { postId } = action.payload
+      const existingPost = state.posts.find((post) => post._id === postId)
+      if (existingPost) {
+        existingPost.likeCount++
+      }
+      axios.patch(`${POST_URL}/${postId}/likePost`)
     },
   },
   extraReducers(builder) {
@@ -63,10 +67,9 @@ const postsSlice = createSlice({
         let min = 1
         const loadedPosts = action.payload.map((post) => {
           post.createdAt = sub(new Date(), { minutes: min++ }).toISOString()
-          post.likeCount = 0
           return post
         })
-        console.log(loadedPosts)
+        // console.log(loadedPosts)
         // Add any fetched posts to the array
         state.posts = state.posts.concat(loadedPosts)
       })
@@ -86,8 +89,8 @@ export const selectAllPosts = (state) => state.posts.posts
 export const getPostsStatus = (state) => state.posts.status
 export const getPostsError = (state) => state.posts.error
 export const selectPostById = (state, postId) =>
-  state.posts.posts.find((post) => post.id === postId)
+  state.posts.posts.find((post) => post._id === postId)
 
-export const { postAdded } = postsSlice.actions
+export const { postAdded, reactionAdded } = postsSlice.actions
 
 export default postsSlice.reducer
