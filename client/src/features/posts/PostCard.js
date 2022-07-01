@@ -1,23 +1,13 @@
-import {
-  Box,
-  Card,
-  createTheme,
-  CssBaseline,
-  IconButton,
-  makeStyles,
-  ThemeProvider,
-  Typography,
-} from '@mui/material'
+import { Box, Card, IconButton, Typography } from '@mui/material'
 import React from 'react'
 import CardContent from '@mui/material/CardContent'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-import CommentIcon from '@mui/icons-material/Comment'
-// import { theme } from '../../theme'
-import { useTheme } from '@emotion/react'
+
+
 import { useDispatch } from 'react-redux'
 import { reactionAdded } from './postsSlice'
-import { Link, useNavigate } from 'react-router-dom'
-import SinglePost from './SinglePost'
+import { useNavigate } from 'react-router-dom'
+
 
 // const useStyle = makeStyles(
 //   theme({
@@ -30,16 +20,19 @@ import SinglePost from './SinglePost'
 
 const PostCard = ({ post }) => {
   const navigate = useNavigate()
-  const onClickHandler = (postId)=>{
+  const onClickHandler = (postId) => {
     // console.log(postId)
     navigate(`/post/${postId}`)
   }
-  
+
   const dispatch = useDispatch()
   return (
     // <ThemeProvider theme={theme}>
     //   <CssBaseline>
-    <Card onClick={()=>onClickHandler(post._id)} sx={{ minWidth: 275, backgroundColor: '#F5C6AA', cursor: 'pointer' }}>
+    <Card
+      onClick={() => onClickHandler(post._id)}
+      sx={{ minWidth: 275, backgroundColor: '#F5C6AA', cursor: 'pointer' }}
+    >
       <CardContent
         sx={{
           height: { xs: 350 },

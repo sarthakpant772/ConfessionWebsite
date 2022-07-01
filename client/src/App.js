@@ -8,8 +8,6 @@ import { fetchPosts } from './features/posts/postsSlice'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import { Box, createTheme, ThemeProvider } from '@mui/material'
-import { theme } from './theme'
-import { breakpoints } from '@mui/system'
 import SinglePost from './features/posts/SinglePost'
 
 store.dispatch(fetchPosts())
